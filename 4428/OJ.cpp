@@ -57,6 +57,6 @@ unsigned int Continumax(char** pOutputstr,  char* inputstr)
 	*pOutputstr = (char*)malloc(maxLen + 1);
 	strncpy(*pOutputstr, initStr + startPos, maxLen);
 	(*pOutputstr)[maxLen] = '\0';
-
+ 
 	return maxLen;
 }
