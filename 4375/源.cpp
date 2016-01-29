@@ -3,8 +3,9 @@
 #include <vector>
 using namespace std;
 
-//"7X^4-5X^3+3X^3+1X^0"
+// "7X^4-5X^3+3X^3+1X^0"
 // 提取多项式的系数，数组第i个元素表示指数为i的系数
+// 将字符串中的数字以空格隔开，然后分割
 vector<int> GetFactor(char* Str)
 {
 	string s;
@@ -33,7 +34,7 @@ vector<int> GetFactor(char* Str)
 		}
 		i = j + 1;
 	}
-	
+	// 获取最大指数
 	int maxExp = 0;
 	for (vector<int>::size_type i = 1; i < nums.size(); i += 2)
 	{	
@@ -66,23 +67,10 @@ vector<int> FactorMultiple(vector<int> factor1, vector<int> factor2)
 // 数字转字符串
 string num2string(int num)
 {
-	if (num == 0)
-		return "0";
-	string res;
-	bool negtiveFlag = false;
-	if (num < 0)
-	{
-		negtiveFlag = true;
-		num *= -1;
-	}
-	while (num != 0)
-	{
-		char temp = num % 10 + '0';
-		res = temp + res;
-		num /= 10;
-	}
-	if (negtiveFlag)
-		res = '-' + res;
+	char str[10];
+	string s;
+	sprintf(str, "%d", num);
+	string res = str;
 	return res;
 }
 
@@ -99,10 +87,9 @@ string GetPolynomial(vector<int> factor)
 				poly += '+';
 			poly += num2string(factor[i]) + "X^" + num2string(i);
 		}
-			//poly += _itoa_s(factor,)
 	}
-	
-	// 这行代码会使一个事例不通过
+
+	//这行代码会使一个事例不通过
 	//if (poly.length() == 0)
 	//	return "0";
 	return poly;
@@ -112,7 +99,7 @@ string GetPolynomial(vector<int> factor)
 Description     : 对两个输入的一元多项式，进行多项式乘法运算，输出结果一元多项式
 Prototype       : void PolynomialMultiple (char* InputString1, char* InputString2, char* OutputString)
 Input Param     : char* InputString1 乘数1多项式字符串
-                  char* InputString2 乘数2多项式字符串
+char* InputString2 乘数2多项式字符串
 Output Param    : char* OutputString 乘积多项式字符串
 Return Value    : void
 
@@ -120,7 +107,6 @@ Return Value    : void
 
 void PolynomialMultiple(char* InputString1, char* InputString2, char* OutputString)
 {
-	/*在这里实现功能*/
 	vector<int> factor1 = GetFactor(InputString1);
 	vector<int> factor2 = GetFactor(InputString2);
 
@@ -139,6 +125,6 @@ int main()
 	char str2[] = "-3X^3+3X^3";
 	char outStr[1024];
 	PolynomialMultiple(str1, str2, outStr);
-
 	cout << outStr << endl;
+	
 }
